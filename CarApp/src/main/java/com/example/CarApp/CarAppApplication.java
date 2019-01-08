@@ -20,7 +20,7 @@ import com.example.CarApp.domain.TripRepository;
 public class CarAppApplication {
 
 	@Autowired
-	private CarRepository repository;
+	private CarRepository carrepository;
 
 	@Autowired
 	private OwnerRepository orepository;
@@ -48,25 +48,27 @@ public class CarAppApplication {
 			Owner owner2 = new Owner("Mary", "Robinson");
 			orepository.save(owner1);
 			orepository.save(owner2);
-
+			
 			// Add car object with link to owners and save these to db.
 			Car car1 = new Car("Ford", "Mustang", "Red", "ADF-1121", 2017, 59000, owner1);
-		    repository.save(car1);
+			carrepository.save(car1);
 			Car car2 = new Car("Nissan", "Leaf", "White", "SSJ-3002", 2014, 29000, owner2);
-			repository.save(car2);
+			carrepository.save(car2);
 			Car car3 = new Car("Toyota", "Prius", "Silver", "KKO-0212", 2018, 39000, owner2);
-			repository.save(car3);
+			carrepository.save(car3);
+			
+			Car car4 = new Car("anan", "anan", "anan", "KKO-0212", 2018, 39000, owner2);
+			carrepository.save(car4);
 			
 			Set<Car> cars = new HashSet<Car>();
 			cars.add(car1);
 			cars.add(car2);
 			
-	
 			Trip trip1 = new Trip("italy",cars);
 			trpository.save(trip1);
-			
 			Trip trip2 = new Trip("brazil",cars);
 			trpository.save(trip2);
+			
 	
 		};
 	}

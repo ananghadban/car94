@@ -16,16 +16,20 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Car {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	private String brand, model, color, registerNumber;
+	private int year, price;
+	
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "owner")
 	private Owner owner;
 	
-	   @ManyToMany(cascade = CascadeType.MERGE)
-	      @JoinTable(name = "car_trips", joinColumns = { @JoinColumn(name =
-	       "id") }, inverseJoinColumns = { @JoinColumn(name = "tripid") }) 
-
-	private Set<Trip> trips;
+	@ManyToMany(mappedBy = "cars") 
+    private Set<Car> trips; 
 
 	public Car() {
 
@@ -41,6 +45,7 @@ public class Car {
 		this.price = price;
 	}
 
+	
 	public Car(String brand, String model, String color, String registerNumber, int year, int price, Owner owner) {
 		super();
 		this.brand = brand;
@@ -52,11 +57,18 @@ public class Car {
 		this.owner = owner;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	private String brand, model, color, registerNumber;
-	private int year, price;
+
+	public Car(String brand, String model, String color, String registerNumber, int year, int price, Owner owner,Set<Trip> trips) {
+		super();
+		this.brand = brand;
+		this.model = model;
+		this.color = color;
+		this.registerNumber = registerNumber;
+		this.year = year;
+		this.price = price;
+		this.owner = owner;
+	}
+	
 
 	public long getId() {
 		return id;
@@ -121,4 +133,13 @@ public class Car {
 	public void setOwner(Owner owner) {
 		this.owner = owner;
 	}
+
+	public Set<Car> getTrips() {
+		return trips;
+	}
+
+	public void setTrips(Set<Car> trips) {
+		this.trips = trips;
+	}
+	
 }

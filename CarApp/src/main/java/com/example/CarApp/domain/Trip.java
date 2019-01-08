@@ -4,12 +4,13 @@ import java.util.HashSet;
 
 import java.util.Set;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 
@@ -20,8 +21,13 @@ public class Trip {
 	private long tripid;
 	private String name;
 
-	@ManyToMany(mappedBy = "trips") 
-     private Set<Car> cars = new HashSet<Car>(0);
+
+	
+	 @ManyToMany(cascade = CascadeType.MERGE)
+     @JoinTable(name = "car_trips", joinColumns = { @JoinColumn(name =
+      "id") }, inverseJoinColumns = { @JoinColumn(name = "tripid") }) 
+      private Set<Car> cars;
+	
 	public Trip() {
 
 	}
@@ -61,7 +67,4 @@ public class Trip {
 	public void setCars(Set<Car> cars) {
 		this.cars = cars;
 	}
-
-
-
 }
