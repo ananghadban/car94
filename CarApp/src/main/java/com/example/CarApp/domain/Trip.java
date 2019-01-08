@@ -25,7 +25,7 @@ public class Trip {
 	
 	 @ManyToMany(cascade = CascadeType.MERGE)
      @JoinTable(name = "car_trips", joinColumns = { @JoinColumn(name =
-      "id") }, inverseJoinColumns = { @JoinColumn(name = "tripid") }) 
+      "tripid") }, inverseJoinColumns = { @JoinColumn(name = "id") }) 
       private Set<Car> cars;
 	
 	public Trip() {

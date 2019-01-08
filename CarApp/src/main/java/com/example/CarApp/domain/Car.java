@@ -29,7 +29,7 @@ public class Car {
 	private Owner owner;
 	
 	@ManyToMany(mappedBy = "cars") 
-    private Set<Car> trips; 
+    private Set<Trip> trips; 
 
 	public Car() {
 
@@ -134,11 +134,11 @@ public class Car {
 		this.owner = owner;
 	}
 
-	public Set<Car> getTrips() {
+	public Set<Trip> getTrips() {
 		return trips;
 	}
 
-	public void setTrips(Set<Car> trips) {
+	public void setTrips(Set<Trip> trips) {
 		this.trips = trips;
 	}
 	
