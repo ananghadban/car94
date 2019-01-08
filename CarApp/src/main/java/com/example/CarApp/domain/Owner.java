@@ -27,6 +27,7 @@ public class Owner {
 	public Owner() {
 	}
 
+	
 	public Owner(String firstname, String lastname) {
 		super();
 		this.firstname = firstname;
