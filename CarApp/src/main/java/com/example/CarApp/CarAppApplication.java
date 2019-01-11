@@ -26,7 +26,7 @@ public class CarAppApplication {
 	private OwnerRepository orepository;
 	
 	@Autowired
-	private TripRepository trpository;
+	private TripRepository trepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CarAppApplication.class, args);
@@ -36,38 +36,39 @@ public class CarAppApplication {
 	CommandLineRunner runner() {
 		return args -> {
 			// Save demo data to database
-			/*
-			 * repository.save(new Car("Ford", "Mustang", "Red", "ADF-1121", 2017, 59000));
-			 * repository.save(new Car("Nissan", "Leaf", "White", "SSJ-3002", 2014, 29000));
-			 * repository.save(new Car("Toyota", "Prius", "Silver", "KKO-0212", 2018,
-			 * 39000));
-			 */
-
 			// Add owner objects and save these to db
-			Owner owner1 = new Owner("John", "Johnson");
-			Owner owner2 = new Owner("Mary", "Robinson");
-			orepository.save(owner1);
-			orepository.save(owner2);
-			
-			// Add car object with link to owners and save these to db.
-			Car car1 = new Car("Ford", "Mustang", "Red", "ADF-1121", 2017, 59000, owner1);
-			carrepository.save(car1);
-			Car car2 = new Car("Nissan", "Leaf", "White", "SSJ-3002", 2014, 29000, owner2);
-			carrepository.save(car2);
-			Car car3 = new Car("Toyota", "Prius", "Silver", "KKO-0212", 2018, 39000, owner2);
-			carrepository.save(car3);
-			
-			Car car4 = new Car("anan", "anan", "anan", "KKO-0212", 2018, 39000, owner2);
-			carrepository.save(car4);
-			
-			Set<Car> cars = new HashSet<Car>();
-			cars.add(car1);
-			cars.add(car2);
-			
-			Trip trip1 = new Trip("italy",cars);
-			trpository.save(trip1);
-			Trip trip2 = new Trip("brazil",cars);
-			trpository.save(trip2);
+	          Owner owner1 = new Owner("John" , "Johnson");
+	          Owner owner2 = new Owner("Mary" , "Robinson");
+	          orepository.save(owner1);
+	          orepository.save(owner2);
+	          
+	          //Add trip objects
+	          Trip trip1 = new Trip("Trip A");
+	          Trip trip2 = new Trip("Trip B");
+	          trepository.save(trip1);
+	          trepository.save(trip2);
+
+	          // Add car object with link to owners and save these to db.
+	          
+	          Set<Trip> trips1= new HashSet<Trip>();
+	          trips1.add(trip1);
+	          trips1.add(trip2);
+	          
+	          Set<Trip> trips2= new HashSet<Trip>();
+	          trips2.add(trip1);
+	          
+	          Set<Trip> trips3= new HashSet<Trip>();
+	          trips3.add(trip2);
+	          
+	          Car car = new Car("Ford", "Mustang", "Red", 
+	              "ADF-1121", 2017, 59000, owner1,trips1);
+	          carrepository.save(car);
+	          car = new Car("Nissan", "Leaf", "White",
+	              "SSJ-3002", 2014, 29000, owner2,trips2);
+	          carrepository.save(car);
+	          car = new Car("Toyota", "Prius", "Silver",
+	              "KKO-0212", 2018, 39000, owner2, trips3);
+	          carrepository.save(car);
 			
 	
 		};

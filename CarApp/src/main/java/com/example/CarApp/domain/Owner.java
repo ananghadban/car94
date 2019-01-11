@@ -2,38 +2,28 @@ package com.example.CarApp.domain;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Owner {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+
 	private long ownerid;
 	private String firstname, lastname;
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@JsonIgnore
-	private List<Car> cars;
 
 	public Owner() {
 	}
 
-	
 	public Owner(String firstname, String lastname) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getOwnerid() {
 		return ownerid;
 	}
@@ -58,6 +48,10 @@ public class Owner {
 		this.lastname = lastname;
 	}
 
+	private List<Car> cars;
+	// Getter and setter
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
 	public List<Car> getCars() {
 		return cars;
 	}
