@@ -22,6 +22,7 @@ public class Owner {
 		this.lastname = lastname;
 	}
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getOwnerid() {

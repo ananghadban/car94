@@ -13,6 +13,8 @@ import com.example.CarApp.domain.Car;
 import com.example.CarApp.domain.CarRepository;
 import com.example.CarApp.domain.Owner;
 import com.example.CarApp.domain.OwnerRepository;
+import com.example.CarApp.domain.Person;
+import com.example.CarApp.domain.PersonRepository;
 import com.example.CarApp.domain.Trip;
 import com.example.CarApp.domain.TripRepository;
 
@@ -27,6 +29,9 @@ public class CarAppApplication {
 	
 	@Autowired
 	private TripRepository trepository;
+	
+	@Autowired
+	private PersonRepository prrepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CarAppApplication.class, args);
@@ -69,8 +74,12 @@ public class CarAppApplication {
 	          car = new Car("Toyota", "Prius", "Silver",
 	              "KKO-0212", 2018, 39000, owner2, trips3);
 	          carrepository.save(car);
+	          
+	          Person person = new Person("anan",trips1);
+	          prrepository.save(person);
+	          person = new Person("john",trips2);
+	          prrepository.save(person);
 			
-	
 		};
 	}
 }

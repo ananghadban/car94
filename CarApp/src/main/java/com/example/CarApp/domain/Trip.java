@@ -14,6 +14,7 @@ public class Trip {
 	String name;
 
 	private Set<Car> cars;
+	private Set<Person> persons;
 
 	@ManyToMany(mappedBy = "trips")
 	public Set<Car> getCars() {
@@ -22,6 +23,15 @@ public class Trip {
 
 	public void setCars(Set<Car> cars) {
 		this.cars = cars;
+	}
+	
+	@ManyToMany(mappedBy = "trips")
+	public Set<Person> getPersons() {
+		return persons;
+	}
+
+	public void setPersons(Set<Person> persons) {
+		this.persons = persons;
 	}
 
 	@Id
@@ -42,11 +52,11 @@ public class Trip {
 		this.name = name;
 	}
 
-	public Trip(String name, Set<Car> cars) {
+	public Trip(String name, Set<Car> cars, Set<Person> persons) {
 		super();
-
 		this.name = name;
 		this.cars = cars;
+		this.persons = persons;
 	}
 
 	public Trip(String name) {
