@@ -9,7 +9,7 @@ import com.example.CarApp.domain.Car;
 import com.example.CarApp.domain.CarRepository;
 
 @RestController
-public class AppController {
+public class CarController {
   @Autowired
   private CarRepository repository;
 

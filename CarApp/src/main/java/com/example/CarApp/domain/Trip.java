@@ -7,8 +7,34 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import java.math.BigInteger;
+import javax.persistence.SqlResultSetMapping;
+
 @Entity
-public class Trip {
+@SqlResultSetMapping(
+			name="ownersInTripMapping",
+		    classes={
+		        @ConstructorResult(
+		        		targetClass=OwnersInTrip.class,
+		            columns={
+		                @ColumnResult(name="FIRSTNAME", type = String.class),
+		                @ColumnResult(name="NAME", type = String.class),
+		                @ColumnResult(name="TRIP_ID", type = BigInteger.class)
+		            }
+		        )
+		    }
+		)
+
+	@NamedNativeQuery(name="Trip.getOwnersInTrip", query="SELECT OWNER.FIRSTNAME, TRIP.NAME, TRIP.TRIP_ID "
+			+ "FROM TRIP INNER JOIN "
+			+ "((OWNER INNER JOIN CAR ON OWNER.OWNERID = CAR.OWNER) "
+			+ "INNER JOIN CAR_IN_TRIP ON CAR.ID = CAR_IN_TRIP.CAR_ID) "
+			+ "ON TRIP.TRIP_ID = CAR_IN_TRIP.TRIP_ID "
+			+ "WHERE (((TRIP.TRIP_ID)= :tripId))", resultSetMapping="ownersInTripMapping")
+
+
+public class Trip 
+{
 
 	long trip_id;
 	String name;

@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Owner {
 
@@ -53,6 +56,8 @@ public class Owner {
 	// Getter and setter
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnore
 	public List<Car> getCars() {
 		return cars;
 	}

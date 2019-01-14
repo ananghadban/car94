@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Car {
     
@@ -92,6 +94,7 @@ public class Car {
     //Getter and setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     public Owner getOwner() {
       return owner;
     }
